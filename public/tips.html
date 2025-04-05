@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Reduction Tips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .tip-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-[#2D4263] text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-recycle text-2xl text-[#EAA536]"></i>
+                <span class="text-xl font-bold">FoodSave</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-[#EAA536]">Home</a>
+                <a href="dashboard.html" class="hover:text-[#EAA536]">Dashboard</a>
+                <a href="tips.html" class="text-[#EAA536] font-medium">Tips</a>
+                <a href="report.html" class="hover:text-[#EAA536]">Reports</a>
+                <a href="settings.html" class="hover:text-[#EAA536]">Settings</a>
+            </div>
+            <button class="md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-[#2D4263] mb-8">Food Waste Reduction Tips</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tip 1: Meal Planning -->
+            <div class="tip-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/4057736/pexels-photo-4057736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Meal planning" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-[#EAA536] text-white p-2 rounded-full mr-3">
+                            <i class="fas fa-clipboard-list text-lg"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-[#2D4263]">Meal Planning</h2>
+                    </div>
+                    <p class="text-gray-600 mb-4">Plan your meals for the week before shopping to avoid buying unnecessary items.</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Create a weekly meal plan</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Check your pantry before shopping</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Make a precise shopping list</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tip 2: Proper Storage -->
+            <div class="tip-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/4207785/pexels-photo-4207785.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Proper food storage" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-[#EAA536] text-white p-2 rounded-full mr-3">
+                            <i class="fas fa-box-open text-lg"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-[#2D4263]">Proper Storage</h2>
+                    </div>
+                    <p class="text-gray-600 mb-4">Store food correctly to maximize freshness and shelf life.</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Use airtight containers for dry goods</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Store produce in proper humidity</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Freeze leftovers you won't eat soon</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tip 3: Creative Recipes -->
+            <div class="tip-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/5907771/pexels-photo-5907771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Creative cooking" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-[#EAA536] text-white p-2 rounded-full mr-3">
+                            <i class="fas fa-utensils text-lg"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-[#2D4263]">Creative Recipes</h2>
+                    </div>
+                    <p class="text-gray-600 mb-4">Transform leftovers and aging ingredients into delicious meals.</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Make soups from vegetable scraps</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Use overripe fruit in smoothies or baking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Create "clean out the fridge" stir-fries</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tip 4: Composting -->
+            <div class="tip-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/6208086/pexels-photo-6208086.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Composting" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-[#EAA536] text-white p-2 rounded-full mr-3">
+                            <i class="fas fa-leaf text-lg"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-[#2D4263]">Composting</h2>
+                    </div>
+                    <p class="text-gray-600 mb-4">Turn food scraps into nutrient-rich compost for your garden.</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Set up a compost bin in your yard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Use a countertop bin for collection</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Balance greens and browns in your compost</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tip 5: Expiration Dates -->
+            <div class="tip-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/3987151/pexels-photo-3987151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Checking expiration dates" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-[#EAA536] text-white p-2 rounded-full mr-3">
+                            <i class="fas fa-calendar-check text-lg"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-[#2D4263]">Date Management</h2>
+                    </div>
+                    <p class="text-gray-600 mb-4">Understand and manage food expiration dates properly.</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Learn the difference between "use by" and "best before"</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Organize your pantry/fridge by expiration date</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Trust your senses - many foods last beyond dates</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tip 6: Portion Control -->
+            <div class="tip-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/5949884/pexels-photo-5949884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Measuring portions" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-[#EAA536] text-white p-2 rounded-full mr-3">
+                            <i class="fas fa-weight text-lg"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-[#2D4263]">Portion Control</h2>
+                    </div>
+                    <p class="text-gray-600 mb-4">Serve appropriate portions to reduce plate waste.</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Use smaller plates to control portions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Measure ingredients when cooking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#EAA536] mt-1 mr-2"></i>
+                            <span>Start with smaller servings - you can always get more</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#2D4263] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-recycle text-2xl text-[#EAA536]"></i>
+                        <span class="text-xl font-bold">FoodSave</span>
+                    </div>
+                    <p class="mt-2">Helping you reduce food waste since 2023</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-[#EAA536]"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-[#EAA536]"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-[#EAA536]"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center md:text-left">
+                <p>&copy; 2023 FoodSave. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
