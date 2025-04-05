@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Reports</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .stat-card {
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-[#2D4263] text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-recycle text-2xl text-[#EAA536]"></i>
+                <span class="text-xl font-bold">FoodSave</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-[#EAA536]">Home</a>
+                <a href="dashboard.html" class="hover:text-[#EAA536]">Dashboard</a>
+                <a href="tips.html" class="hover:text-[#EAA536]">Tips</a>
+                <a href="report.html" class="text-[#EAA536] font-medium">Reports</a>
+                <a href="settings.html" class="hover:text-[#EAA536]">Settings</a>
+            </div>
+            <button class="md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <h1 class="text-3xl font-bold text-[#2D4263]">Food Waste Reports</h1>
+            <div class="mt-4 md:mt-0">
+                <select id="monthSelect" class="rounded-md border-gray-300 shadow-sm focus:border-[#2D4263] focus:ring focus:ring-[#2D4263] focus:ring-opacity-50 p-2 border">
+                    <option value="all">All Time</option>
+                    <option value="3">Last 3 Months</option>
+                    <option value="6">Last 6 Months</option>
+                    <option value="12">Last 12 Months</option>
+                </select>
+                <button onclick="exportToCSV()" class="ml-2 bg-[#EAA536] hover:bg-[#d1932e] text-white font-bold py-2 px-4 rounded-md transition duration-300">
+                    <i class="fas fa-file-export mr-2"></i>Export Data
+                </button>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="stat-card bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center mb-3">
+                    <div class="bg-[#2D4263] text-white p-2 rounded-full mr-3">
+                        <i class="fas fa-weight-hanging text-lg"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-[#2D4263]">Total Waste</h2>
+                </div>
+                <p class="text-3xl font-bold mb-2" id="totalWaste">0 kg</p>
+                <p class="text-sm text-gray-600">Since you started tracking</p>
+            </div>
+            
+            <div class="stat-card bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center mb-3">
+                    <div class="bg-[#2D4263] text-white p-2 rounded-full mr-3">
+                        <i class="fas fa-cloud text-lg"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-[#2D4263]">CO₂ Saved</h2>
+                </div>
+                <p class="text-3xl font-bold mb-2" id="co2Saved">0 kg</p>
+                <p class="text-sm text-gray-600">Equivalent emissions reduced</p>
+            </div>
+            
+            <div class="stat-card bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center mb-3">
+                    <div class="bg-[#2D4263] text-white p-2 rounded-full mr-3">
+                        <i class="fas fa-money-bill-wave text-lg"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-[#2D4263]">Money Saved</h2>
+                </div>
+                <p class="text-3xl font-bold mb-2" id="moneySaved">$0</p>
+                <p class="text-sm text-gray-600">Estimated from reduced waste</p>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Monthly Waste Trend -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold text-[#2D4263] mb-4">Monthly Waste Trend</h2>
+                <div class="chart-container">
+                    <canvas id="monthlyTrendChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Waste by Category -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold text-[#2D4263] mb-4">Waste by Category</h2>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Breakdown -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-xl font-bold text-[#2D4263] mb-4">Detailed Breakdown</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Month</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Waste</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CO₂ Saved</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Money Saved</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="reportTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#2D4263] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-recycle text-2xl text-[#EAA536]"></i>
+                        <span class="text-xl font-bold">FoodSave</span>
+                    </div>
+                    <p class="mt-2">Helping you reduce food waste since 2023</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-[#EAA536]"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-[#EAA536]"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-[#EAA536]"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center md:text-left">
+                <p>&copy; 2023 FoodSave. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Initialize charts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReportData();
+            
+            // Sample data - in a real app this would come from your data storage
+            const monthlyData = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                data: [4.2, 3.8, 3.5, 3.2, 2.9, 2.7, 2.5]
+            };
+            
+            const categoryData = {
+                labels: ['Meat', 'Vegetables', 'Fruits', 'Dairy', 'Grains', 'Other'],
+                data: [1.2, 0.8, 0.6, 0.5, 0.4, 0.3]
+            };
+            
+            // Create Monthly Trend Chart
+            const trendCtx = document.getElementById('monthlyTrendChart').getContext('2d');
+            const trendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: monthlyData.labels,
+                    datasets: [{
+                        label: 'Waste (kg)',
+                        data: monthlyData.data,
+                        backgroundColor: 'rgba(234, 165, 54, 0.2)',
+                        borderColor: 'rgba(234, 165, 54, 1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' kg';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Kilograms'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Create Category Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            const categoryChart = new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: categoryData.labels,
+                    datasets: [{
+                        data: categoryData.data,
+                        backgroundColor: [
+                            'rgba(45, 66, 99, 0.7)',
+                            'rgba(234, 165, 54, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + ' kg';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Update charts when month selection changes
+            document.getElementById('monthSelect').addEventListener('change', function() {
+                // In a real app, you would filter data based on selection
+                console.log('Filtering data for:', this.value);
+            });
+        });
+        
+        function loadReportData() {
+            // In a real app, this would load data from localStorage/API
+            // For now, we'll use sample data
+            document.getElementById('totalWaste').textContent = '15.6 kg';
+            document.getElementById('co2Saved').textContent = '39 kg';
+            document.getElementById('moneySaved').textContent = '$78';
+            
+            // Sample monthly breakdown data
+            const breakdownData = [
+                { month: 'July 2023', waste: '2.5 kg', co2: '6.25 kg', money: '$12.50', change: '-7%' },
+                { month: 'June 2023', waste: '2.7 kg', co2: '6.75 kg', money: '$13.50', change: '-7%' },
+                { month: 'May 2023', waste: '2.9 kg', co2: '7.25 kg', money: '$14.50', change: '-9%' },
+                { month: 'April 2023', waste: '3.2 kg', co2: '8.00 kg', money: '$16.00', change: '-9%' },
+                { month: 'March 2023', waste: '3.5 kg', co2: '8.75 kg', money: '$17.50', change: '-8%' }
+            ];
+            
+            const tableBody = document.getElementById('reportTableBody');
+            tableBody.innerHTML = '';
+            
+            breakdownData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.month}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.waste}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.co2}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.money}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm ${item.change.startsWith('-') ? 'text-green-500' : 'text-red-500'}">${item.change}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
